@@ -5,6 +5,8 @@
   "author": "Jesús Urrutia <jesus.urrutia@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server",
     "code:check": "yarn code:lint; yarn code:format --check",
     "code:clean": "yarn code:lint --fix; yarn code:format --write",
     "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",

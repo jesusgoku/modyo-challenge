@@ -7,6 +7,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server",
+    "pack": "tar -czvf \"$(basename $PWD)-$(cat package.json | grep '\"version\":' | awk 'BEGIN { IFS = \":\" } { print $2 }' | sed -E 's/\"([0-9]\\.[0-9]\\.[0-9])\",/\\1/').tgz\" dist",
+    "prepack": "yarn run build",
     "code:check": "yarn code:lint; yarn code:format --check",
     "code:clean": "yarn code:lint --fix; yarn code:format --write",
     "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",

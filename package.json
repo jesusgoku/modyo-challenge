@@ -6,9 +6,12 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server",
+    "start": "yarn run build && http-server -p 8080 dist",
+    "dev": "webpack-dev-server",
+    "clean": "rm -rf dist",
     "pack": "tar -czvf \"$(basename $PWD)-$(cat package.json | grep '\"version\":' | awk 'BEGIN { IFS = \":\" } { print $2 }' | sed -E 's/\"([0-9]\\.[0-9]\\.[0-9])\",/\\1/').tgz\" dist",
     "prepack": "yarn run build",
+    "release": "standard-version",
     "code:check": "yarn code:lint; yarn code:format --check",
     "code:clean": "yarn code:lint --fix; yarn code:format --write",
     "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
@@ -22,10 +25,13 @@
     "@commitlint/config-conventional": "^8.3.4",
     "babel-loader": "^8.1.0",
     "bulma": "^0.8.1",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-import": "^2.20.2",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.4",
+    "http-server": "^0.12.1",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
     "mini-css-extract-plugin": "^0.9.0",
@@ -33,11 +39,16 @@
     "poetic": "^1.5.0",
     "purgecss-webpack-plugin": "^2.1.0",
     "sass-loader": "^8.0.2",
+    "standard-version": "^7.1.0",
     "style-loader": "^1.1.3",
+    "url-loader": "^4.0.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-subresource-integrity": "^1.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "flickity": "^2.2.1",
+    "vanillajs-scrollspy": "^2.0.3"
+  }
 }

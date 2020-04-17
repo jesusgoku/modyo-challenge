@@ -6,11 +6,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SriPlugin = require('webpack-subresource-integrity');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (_, { mode }) => {
   const isProduction = mode === 'production';
 
-  return ({
+  return {
     entry: './src/js/main.js',
 
     output: {
@@ -32,7 +33,11 @@ module.exports = (_, { mode }) => {
         },
         {
           test: /\.s[ac]ss$/,
-          use: [MiniCssExtractPlugin.loader, { loader: 'css-loader' }, { loader: 'sass-loader', options: { sourceMap: true } }],
+          use: [
+            MiniCssExtractPlugin.loader,
+            { loader: 'css-loader' },
+            { loader: 'sass-loader', options: { sourceMap: true } },
+          ],
         },
         {
           test: /\.(svg|jpe?g|gif|png|eot|woff|ttf)$/,
@@ -42,10 +47,7 @@ module.exports = (_, { mode }) => {
     },
 
     resolve: {
-      modules: [
-        path.resolve(__dirname, './src'),
-        'node_modules',
-      ],
+      modules: [path.resolve(__dirname, './src'), 'node_modules'],
       extensions: ['.js', '.json'],
       alias: {
         '@app': path.resolve(__dirname, './src'),
@@ -67,14 +69,15 @@ module.exports = (_, { mode }) => {
         filename: 'css/main.css',
       }),
 
+      new CopyPlugin([{ from: 'src/images', to: 'images' }]),
 
       new PurgecssPlugin({
-        paths: glob.sync(`${path.resolve(__dirname, './src')}/**/*`,  { nodir: true }),
+        paths: glob.sync(`${path.resolve(__dirname, './src')}/**/*`, { nodir: true }),
       }),
     ],
 
     devServer: {
       contentBase: './dist',
     },
-  })
+  };
 };

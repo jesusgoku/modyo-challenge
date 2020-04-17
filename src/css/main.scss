@@ -1,2 +1,362 @@
 @charset "utf-8";
+
+@import "~@app/css/icomoon.css";
+
+// -- PROJECT COLORS
+$buttonsAndLinksColor: hsl(167, 55%, 58%); // #58cfb5; // rgb(88, 207, 182);
+$primaryBgColor: hsl(0, 0%, 100%); // #ffffff; // rgb(255, 255, 255);
+$secondaryBgColor: hsl(0, 0%, 96%); // #f6f6f6; // rgb(246, 246, 246);
+$titlesColor: hsl(0, 0%, 0%); // #000000; // rgb(0, 0, 0);
+$tickColor: hsl(84, 46%, 55%); // #96c156; // rgb(151, 193, 86);
+$normalTextColor: hsl(0, 0%, 50%); // #808080; // rgb(128, 128, 128);
+$greyInputBorderColor: hsl(213, 13%, 83%); // #ced3d9; // rgb(206, 211, 217);
+$greyPlaceholderColor: hsl(210, 7%, 46%); // #6d757d; // rgb(109, 117, 125);
+
+// -- BULMA VARS OVERWRITE
+$primary: $buttonsAndLinksColor;
+
+$link: $buttonsAndLinksColor;
+
+$input-radius: 0;
+$input-border-color: $greyInputBorderColor;
+$input-box-shadow: none;
+
+// -- BULMA IMPORTS
 @import "~bulma/bulma";
+// @import "~bulma/sass/utilities/_all.sass";
+// @import "~bulma/sass/base/_all.sass";
+// @import "~bulma/sass/grid/columns.sass";
+// @import "~bulma/sass/elements/container.sass";
+// @import "~bulma/sass/elements/image.sass";
+// @import "~bulma/sass/elements/button.sass";
+// @import "~bulma/sass/elements/title.sass";
+// @import "~bulma/sass/form/_all.sass";
+// @import "~bulma/sass/layout/section.sass";
+
+// -- FORCE OVERWRITE BULMA STYLES
+.button.is-primary,
+.button.is-primary:hover,
+.button.is-primary:active,
+.button.is-primary:focus {
+  color: $primaryBgColor;
+}
+
+// -- flickity
+@import '~flickity/dist/flickity.css';
+
+.flickity-page-dots .dot.is-selected {
+  background-color: $buttonsAndLinksColor;
+}
+
+// -- MY SCSS
+html {
+  font-size: 62.5%;
+
+  @include until($tablet) {
+    padding-top: 3.25rem;
+  }
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+// -- primary-navbar
+
+.primary-navbar {
+  border-bottom: 1px solid #eaeaea;
+
+  position: relative;
+
+  @include until($tablet) {
+    border-bottom: none;
+
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 30;
+  }
+}
+
+.primary-navbar__brand {
+  font-size: 3.4rem;
+
+  align-items: center;
+}
+
+.primary-navbar__brand-item {
+  @include from($desktop) {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(80%);
+  }
+}
+
+.primary-navbar__start {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.primary-navbar__item.active,
+.primary-navbar__item--active {
+  color: $buttonsAndLinksColor;
+}
+
+// -- Block: section
+
+.section {
+  background-color: $primaryBgColor;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  overflow: hidden;
+
+  @include until($tablet) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.section--odd {
+  background-color: $secondaryBgColor;
+}
+
+.section__title {
+  font-size: 4rem;
+  text-align: center;
+  font-weight: 800;
+
+  margin-bottom: 3rem;
+}
+
+// -- Block: landing
+
+.landing__section {
+  overflow: hidden;
+}
+
+.landing__picture-column {
+  order: 13;
+}
+
+.landing__picture {
+  max-width: unset;
+
+  @include until($desktop) {
+    max-width: 150%;
+  }
+
+  @include until($tablet) {
+    max-width: 100%;
+  }
+}
+
+.landing__title {
+  font-size: 6rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+
+  @include until($tablet) {
+    font-size: 3rem;
+  }
+}
+
+.landing_paragraph {
+  color: $normalTextColor;
+  margin-bottom: 20px;
+}
+
+// -- Block: feature-box
+
+.feature-box {
+  background-color: $primaryBgColor;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.feature-box__icon-container {
+  color: $primaryBgColor;
+  background: $buttonsAndLinksColor;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  position: relative;
+
+  transition: transform 500ms ease;
+}
+
+.feature-box__icon {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+}
+
+.feature-box:hover .feature-box__icon-container {
+  transform: rotate(360deg);
+}
+
+.feature-box__title {
+  font-size: 2rem;
+  font-weight: 600;
+
+  margin-bottom: 1.2rem;
+}
+
+.feature-box__paragraph {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  color: $normalTextColor;
+
+  margin-bottom: 1.2rem;
+}
+
+// Block: prototypes
+
+.prototypes__title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.prototypes__paragraph {
+  color: $normalTextColor;
+  margin-bottom: 2rem;
+}
+
+.prototypes__list {
+  margin-bottom: 30px;
+}
+
+.prototypes__list-item {
+  margin-bottom: 10px;
+}
+
+.prototypes__list-item::before {
+  content: '\e5ca';
+  color: $tickColor;
+  margin-right: 10px;
+
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// -- Block: prototype-testimonial
+
+.prototype-testimonial {
+  padding: 20px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 3px 10px -4px rgba(0, 0, 0, 0.75);
+}
+
+.prototype-testimonial__header {
+  display: flex;
+
+  margin-bottom: 20px;
+}
+
+.prototype-testimonial__picture {
+  margin: 0 auto;
+  width: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  flex: 0 0 50px;
+  margin-right: 20px;
+}
+
+.prototype-testimonial__person {
+  flex: 1 1 auto;
+}
+
+.prototype-testimonial__author {
+  font-weight: 800;
+}
+
+.prototype-testimonial__body {
+  color: $normalTextColor;
+  font-style: italic;
+}
+
+// -- Block: about-us
+
+.about-us__picture {
+  box-shadow: 1px 9px 15px -8px rgba(0, 0, 0, 0.75);
+}
+
+.about-us__title {
+  font-size: 4rem;
+  margin-bottom: 3rem;
+}
+
+.about-us__paragraph {
+  font-size: 2rem;
+  color: $normalTextColor;
+  margin-bottom: 3rem;
+}
+
+// -- Block: testimonial
+
+.testimonial__carousel {
+  padding-bottom: 30px;
+}
+
+.testimonial__carousel-item {
+  width: 100%;
+}
+
+.testimonial__picture {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.testimonial__image {
+  width: 100px;
+  height: 100px;
+}
+
+.testimonial__paragraph {
+  color: $normalTextColor;
+  margin-bottom: 20px;
+}
+
+.testimonial__author {
+  text-align: center;
+  font-weight: 600;
+  font-size: .8em;
+}
+
+// -- Block: get-in-touch
+
+.get-in-touch__form {
+  background-color: $primaryBgColor;
+  padding: 40px 30px;
+}
+
+.get-in-touch__form-title {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}

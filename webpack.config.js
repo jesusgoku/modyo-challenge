@@ -79,9 +79,15 @@ module.exports = (_, { mode }) => {
 
       new CopyPlugin([{ from: 'src/images', to: 'images' }]),
 
-      new PurgecssPlugin({
-        paths: glob.sync(`${path.resolve(__dirname, './src')}/**/*`, { nodir: true }),
-      }),
+      ...(isProduction
+        ? [
+            new PurgecssPlugin({
+              paths: glob.sync(`${path.resolve(__dirname, './src')}/**/*`, { nodir: true }),
+              whitelistPatterns: () => [/^flickity-/],
+              whitelistPatternsChildren: () => [/^flickity-/],
+            }),
+          ]
+        : []),
     ],
 
     devServer: {
